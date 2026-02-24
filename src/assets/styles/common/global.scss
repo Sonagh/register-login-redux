@@ -1,0 +1,60 @@
+@use "../common/mixins";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+html {
+  min-height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-size: var(--fs-base);
+  font-family: "Roboto", sans-serif;
+  color: var(--color);
+  background-color: var(--background);
+}
+
+body, #root, .main {
+  height: 100dvh;
+}
+
+.wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: var(--padding);
+  margin-inline: var(--padding);
+  overflow: hidden;
+
+  @media (min-width: 992px) {
+    margin-inline: calc(var(--padding) * 4);
+
+    &--login {
+      flex-direction: row-reverse;
+    }
+
+    &--register {
+      flex-direction: row;
+    }
+  }
+}
+
+button {
+  cursor: pointer;
+}
+
+h1 {
+  font-size: var(--fs-lg);
+}
+
+ul {
+  max-width: 370px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 auto;
+
+  li {
+    padding: var(--padding);
+  }
+}

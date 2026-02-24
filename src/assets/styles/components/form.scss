@@ -1,0 +1,197 @@
+@use "../common/mixins";
+
+.form {
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: calc(var(--padding) * 2);
+
+  &__info-text {
+    color: var(--text-muted);
+  }
+
+  &__title {
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-black);
+    text-align: center;
+    margin-block: calc(var(--padding) * 3);
+    opacity: 0;
+    filter: blur(10px);
+  }
+
+  &__field {
+    position: relative;
+    opacity: 0;
+    filter: blur(10px);
+  }
+
+  &__label {
+    position: absolute;
+    top: 50%;
+    left: var(--padding);
+    transform: translateY(-50%);
+    transition: top 0.2s linear, left 0.2s linear, transform 0.2s linear;
+  }
+
+  &__input {
+    width: 100%;
+    padding: var(--padding);
+    margin-block: calc(var(--padding) * 2);
+    border-bottom: 1px solid var(--color);
+
+    &:focus + .form__label,
+    &--has-value + .form__label {
+      top: 0;
+      left: 0;
+      transform: translateY(0);
+    }
+
+    &-icon {
+      position: absolute;
+      top: 50%;
+      right: var(--padding);
+      transform: translateY(-50%);
+      font-size: var(--fs-md);
+    }
+  }
+
+  &__button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding);
+    font-size: var(--fs-md);
+    margin-top: calc(var(--padding) * 2);
+    background: #051024;
+    background: linear-gradient(0deg, #183465 30%, #6fa7f5 90%);
+    border-radius: var(--radius-lg);
+    opacity: 0;
+    filter: blur(10px);
+  }
+
+  &__login-button {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding);
+    text-align: center;
+    margin-block: var(--padding);
+    opacity: 0;
+    filter: blur(10px);
+
+    span {
+      color: var(--primary);
+    }
+  }
+
+  &--login {
+    .form {
+      &__title {
+        @include mixins.animation(fadeInLeft);
+      }
+
+      &__field {
+        @for $i from 1 through 3 {
+          &:nth-child(#{$i}) {
+            @include mixins.animation(fadeInLeft, calc(var(--delay) * $i));
+          }
+        }
+      }
+
+      &__button {
+        @include mixins.animation(fadeInLeft, calc(var(--delay) * 4));
+      }
+
+      &__login-button {
+        @include mixins.animation(fadeInLeft, calc(var(--delay) * 5));
+      }
+    }
+  }
+
+  &--register {
+    .form {
+      &__title {
+        @include mixins.animation(fadeInRight);
+      }
+
+      &__field {
+        &:nth-of-type(1) {
+          @include mixins.animation(fadeInRight);
+        }
+
+        &:nth-of-type(2) {
+          @include mixins.animation(fadeInRight, calc(var(--delay) * 2));
+        }
+
+        &:nth-of-type(3) {
+          @include mixins.animation(fadeInRight, calc(var(--delay) * 3));
+        }
+      }
+
+      &__button {
+        @include mixins.animation(fadeInRight, calc(var(--delay) * 4));
+      }
+
+      &__login-button {
+        @include mixins.animation(fadeInRight, calc(var(--delay) * 5));
+      }
+    }
+  }
+
+  .wrapper.has-animation & {
+    &--login {
+      .form {
+        &__title {
+          @include mixins.animation(fadeOutLeft);
+        }
+
+        &__field {
+          @for $i from 1 through 2 {
+            &:nth-child(#{$i}) {
+              @include mixins.animation(fadeOutLeft, calc(var(--delay) * $i));
+            }
+          }
+        }
+
+        &__button {
+          @include mixins.animation(fadeOutLeft, calc(var(--delay) * 3));
+        }
+
+        &__login-button {
+          @include mixins.animation(fadeOutLeft, calc(var(--delay) * 4));
+        }
+      }
+    }
+
+    &--register {
+      .form {
+        &__title {
+          @include mixins.animation(fadeOutRight);
+        }
+
+        &__field {
+          @for $i from 1 through 3 {
+            &:nth-child(#{$i}) {
+              @include mixins.animation(fadeOutRight, calc(var(--delay) * $i));
+            }
+          }
+        }
+
+        &__button {
+          @include mixins.animation(fadeOutRight, calc(var(--delay) * 3));
+        }
+
+        &__login-button {
+          @include mixins.animation(fadeOutRight, calc(var(--delay) * 4));
+        }
+      }
+    }
+  }
+
+  @media (min-width: 992px) {
+    width: 50%;
+  }
+}

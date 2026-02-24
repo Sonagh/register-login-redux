@@ -1,0 +1,7 @@
+@mixin animation($name, $delay: 0s, $duration: .6s, $timing: ease-out, $fill: both) {
+  @if $delay == 0s or $delay == null {
+    animation: $name $duration $timing $fill;
+  } @else {
+    animation: $name $duration $timing $delay $fill;
+  }
+}
